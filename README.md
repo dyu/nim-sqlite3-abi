@@ -6,6 +6,35 @@
 
 A low-level Nim wrapper for the [SQLite](https://www.sqlite.org/). Builds and exposes the raw C API of SQLite 3.
 
+## Building `wrap.nim`
+
+Place this in `/usr/local/bin/zcc`:
+```sh
+#!/bin/sh
+
+zig cc $ZCC_OPTS $@
+```
+
+Install modified niminterop
+```sh
+git clone --depth=1 --single-branch -b clang-from-env https://github.com/dyu/nimterop.git
+cd nimterop && nimble install && cd ..
+```
+
+Build
+```sh
+#nimble install -d
+nim c -d:release wrap.nim
+```
+
+Cross-compile to windows
+```sh
+CC=zig ZCC_OPTS='-target x86_64-windows-gnu' nim c --cc:env \
+-o:dist/x86_64-windows-gnu/bin/hello.exe --nimcache:dist/x86_64-windows-gnu \
+--os:windows --cpu:amd64 -d:release \
+wrap.nim
+```
+
 ## Usage
 
 TODO

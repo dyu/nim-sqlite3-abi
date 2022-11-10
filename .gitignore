@@ -1,3 +1,5 @@
 *.zip
+/dist
+/nimterop
 /wrap
 nimcache/
